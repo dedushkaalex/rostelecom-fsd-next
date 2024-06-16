@@ -1,5 +1,5 @@
-import '@/app/styles/globals.css'
+import { App } from '@/app';
+import 'bootstrap/dist/css/bootstrap.css';
+import '@/app/styles/globals.css';
 
-import { App } from '@/app'
-
-export default App
+export default App;
