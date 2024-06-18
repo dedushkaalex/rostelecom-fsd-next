@@ -1,30 +1,35 @@
 import { LinkList, Logo } from '@/shared/ui';
 import { AllowedLangs } from '@/shared/constants/lang';
 import { useLang } from '@/features/changeLanguage';
-import { HEADER_LIST_NAVIGATE } from '@/shared/constants/routes';
+
+import './header.css';
+
+import { Menu, useMenu } from './menu';
+import { addOverflowHiddenToBody } from '@/shared/lib/react-std';
 
 export const Header = () => {
   const { currentLanguage, handleChangeLanguage, translations } = useLang();
+  const menuModel = useMenu();
+
+  const handleOpenModal = () => {
+    addOverflowHiddenToBody();
+    menuModel.handleOpenModal();
+  };
 
   const text = translations[currentLanguage].header;
 
   return (
     <header className='header'>
-      <div className='container header__container row align-items-center'>
-        <button
-          className='header__burger'
-          onClick={() => handleChangeLanguage(AllowedLangs.EN)}
-        >
+      <div className='container header__container'>
+        <button className='header__burger' onClick={handleOpenModal}>
           {text.menu_button}
         </button>
-
+        <Menu />
         <div className='header__logo'>
           <Logo />
         </div>
 
-        <nav>
-          <LinkList options={HEADER_LIST_NAVIGATE} />
-        </nav>
+        <LinkList />
       </div>
     </header>
   );
